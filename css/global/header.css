@@ -1,0 +1,127 @@
+header {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 20px;
+  justify-content: space-between;
+  background-color: var(--c0);
+  border-bottom: 1px solid var(--c1);
+}
+header h1 {
+  color: #0056b3;
+}
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding-right: 24px;
+}
+.buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50px;
+}
+.buttons button:hover {
+  background-color: var(--c1); 
+}
+
+.body-notifications {
+  visibility: hidden;
+  position: absolute;
+  background-color: var(--c0);
+  color: var(--c8);
+  border-radius: 8px;
+  text-align: start;
+  top: 60px;
+  right: 120px;
+  width: 300px; 
+  min-width: max-content;
+  transition: 0.2s;
+  opacity: 0;
+  box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+.body-notifications.ativo {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.2s;
+}
+.header-notifications{
+  font-weight:600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: start;
+  padding: 12px;
+  border-bottom: 1px solid var(--c2);
+}
+
+.content-notifications {
+  text-align: center;
+  color: var(--c7);
+}
+.body-profile {
+  visibility: hidden;
+  position: fixed;
+  background-color: var(--c0);
+  color: var(--c8);
+  border-radius: 8px;
+  text-align: start;
+  top: 60px;
+  right: 60px;
+  width: 140px; 
+  min-width: max-content;
+  transition: 0.2s;
+  opacity: 0;
+  box-shadow: 0 4px 16px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+.body-profile ul {
+  width: 100%;
+}
+.body-profile li {
+  padding-bottom: 4px;
+  cursor: pointer;
+}
+.body-profile li:hover {
+  background-color: var(--c1);
+}
+.body-profile.ativo {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.2s;
+}
+.exit i {
+  padding-left: 12px;
+}
+aside {
+  border-top: 1px solid var(--c0);
+  border-right: 1px solid var(--c1);
+  margin-top: -1px;
+  height: 100%dvh;
+}
+.bg {
+  visibility: hidden;
+}
+.bg.visible {
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    gap: 4px;
+    padding: 0;
+  }
+  .body-profile {
+    right: 20px;
+  }
+  .body-notifications {
+    width: 240px;
+    right: 60px;
+  }
+  header h1 {
+    display: none;
+  }
+}

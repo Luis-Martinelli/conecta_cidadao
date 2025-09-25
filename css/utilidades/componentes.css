@@ -1,0 +1,22 @@
+.botao {
+  display: inline-block;
+  padding: 16px 32px;
+  background: linear-gradient(#a9161c, #7e1e07);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  color: var(--c0);
+  font-size: 18px;
+  line-height: 1.33;
+  font-family: 'Poppins';
+  font-weight: 600;
+  max-width: max-content;
+  border: none;
+  cursor: pointer;
+}
+.btn2:hover .seta{
+  transform: translateX(4px);
+}
+.seta {
+  transition: transform 0.2s;
+}

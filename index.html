@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preload" href="./css/style.css" as="style">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/0bb2a92b24.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="../img/site.webmanifest">
+    <link rel="mask-icon" href="../img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      function decodeJWT(token) {
+
+        let base64Url = token.split(".")[1];
+        let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        let jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+        return JSON.parse(jsonPayload);
+      }
+
+      function handleCredentialResponse(response) {
+
+        console.log("Encoded JWT ID token: " + response.credential);
+
+        const responsePayload = decodeJWT(response.credential);
+
+        console.log("Decoded JWT ID token fields:");
+        console.log("  Full Name: " + responsePayload.name);
+        console.log("  Given Name: " + responsePayload.given_name);
+        console.log("  Family Name: " + responsePayload.family_name);
+        console.log("  Unique ID: " + responsePayload.sub);
+        console.log("  Profile image URL: " + responsePayload.picture);
+        console.log("  Email: " + responsePayload.email);
+      }
+    </script>
+    <title>Conecta Cidadão</title>
+  </head>
+  <body>
+   <section class="bg-gray-50 dark:bg-gray-100">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <img class="w-60 mr-2" src="img/logo.png" alt="logo">
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-50 dark:border-gray-100">
+          <div class="p-4 space-y-4 md:space-y-6 sm:p-8">
+            <span class="span"></span>
+              <h1 class="pb-8 text-4xl text-center font-bold leading-tight tracking-tight text-gray-900 mt-4 mb-12">
+                  Conecta Cidadão
+              </h1>
+              <form class="space-y-4 md:space-y-6" action="#">
+                <div>
+                    <div
+                      id="g_id_onload"
+                      data-auto_prompt="false"
+                      data-callback="handleCredentialResponse"
+                      data-client_id="143475877644-gbqcl29a2efi4u2hai84oggm913597gd.apps.googleusercontent.com">
+                    </div>
+    
+                  <div class="g_id_signin" data-theme="filled_blue"          data-shape="pill">
+                  </div>
+                  </div>
+                  <div class="line-wrapper pb-4">
+                    <div class="line"></div>
+                    <span class="line-text">ou</span>
+                    <div class="line"></div>
+                  </div>
+                   <div>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray"></label>
+                      <input type="email" name="email" id="email" class=" border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-200 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-100 dark:focus:border-blue-100" placeholder="Insira seu e-mail" required="">
+                  </div>
+                   <div>
+                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray"></label>
+                      <input type="password" name="password" id="password" class=" border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-200 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-100 dark:focus:border-blue-100" placeholder="Senha" required="">
+                 </div>
+                  
+                  <button type="submit" class="bg-blue-500 w-full text-white hover:bg-blue-400 focus:ring-4 cursor-pointer focus:outline-2 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Entrar</button>
+                  <div class="flex items-center justify-between">
+                     <div class="flex items-start">
+                      </div>
+                      <a href="#" class="text-sm font-medium hover:text-purple-600 text-blue-600 ">Esqueceu a senha?
+                      </a>
+                  </div>
+                  
+                  </p>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
+   
+  </body>
+
+</html>

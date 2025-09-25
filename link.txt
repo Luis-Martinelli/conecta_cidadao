@@ -1,0 +1,7 @@
+https://app--conecta-cidadao-864a5ceb.base44.app/login?from_url=https://app--conecta-cidadao-864a5ceb.base44.app/&app_id=68100c0d3f92699d864a5ceb
+
+https://www.youtube.com/watch?v=lT3TsvRd3AU
+
+botão hamburger - id="burger"
+botão fechar aside - id="close"
+aside - id="aside"

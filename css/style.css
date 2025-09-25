@@ -1,0 +1,13 @@
+/* Login */
+@import './login/login.css';
+/* Header */
+@import './global/header.css';
+/* Global */
+@import './global/global.css';
+/* Cores */
+@import './utilidades/cores.css';
+/* Componentes */
+@import './utilidades/componentes.css';
+/* Home */
+@import './home/home.css';
+

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preload" href="./css/style.css" as="style">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/0bb2a92b24.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="../img/site.webmanifest">
+    <link rel="mask-icon" href="../img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      function decodeJWT(token) {
+
+        let base64Url = token.split(".")[1];
+        let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        let jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+        return JSON.parse(jsonPayload);
+      }
+
+      function handleCredentialResponse(response) {
+
+        console.log("Encoded JWT ID token: " + response.credential);
+
+        const responsePayload = decodeJWT(response.credential);
+
+        console.log("Decoded JWT ID token fields:");
+        console.log("  Full Name: " + responsePayload.name);
+        console.log("  Given Name: " + responsePayload.given_name);
+        console.log("  Family Name: " + responsePayload.family_name);
+        console.log("  Unique ID: " + responsePayload.sub);
+        console.log("  Profile image URL: " + responsePayload.picture);
+        console.log("  Email: " + responsePayload.email);
+      }
+    </script>
+    <title>Conecta Cidadão</title>
+  </head>
+  <body>
+    <header class="header">
+        <div class="flex items-center gap-2">
+          <button class="burger inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 mr-2 md:hidden" data-filename="layout" data-linenumber="98" data-visual-selector-id="layout98" data-source-location="layout:98:10" data-dynamic-content="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6" data-filename="layout" data-linenumber="104" data-visual-selector-id="layout104" data-source-location="layout:104:12" data-dynamic-content="false"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button>
+          <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?q=80&w=100" alt="Logo">
+          <h1 class="text-lg font-bold">Conecta Cidadão</h1>
+        </div>
+
+        <div class="buttons">
+          <button class="notifications"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-5 w-5" data-filename="layout" data-linenumber="122" data-visual-selector-id="layout122" data-source-location="layout:122:16" data-dynamic-content="false"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></button>
+          <div class="body-notifications">
+            <div class="header-notifications">Notificações
+            </div>
+            <div class="content-notifications p-4">Não há notificações novas.
+            </div>
+          </div>
+          <button class="profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-5 w-5" data-filename="layout" data-linenumber="137" data-visual-selector-id="layout137" data-source-location="layout:137:16" data-dynamic-content="false"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></button>
+          <div class="flex flex-nowrap body-profile p-2 gap-12">
+            <ul>
+              <p class="font-semibold">Minha Conta</p>
+              <li>Perfil</li>
+              <li class="exit">Sair<i class="fa-solid fa-right-from-bracket"></i></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bg fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"></div>
+    </header>
+    <div class="body flex bg-gray-100">
+      <aside class="fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-white px-2 pb-10 pt-16 transition duration-200 md:relative md:inset-y-0 md:translate-x-0 md:pb-0 md:pt-0 -translate-x-full" id="aside">
+        <div class="absolute right-2 top-4 md:hidden">
+          <button id="close" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10" data-filename="layout" data-linenumber="174" data-visual-selector-id="layout174" data-source-location="layout:174:12" data-dynamic-content="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6" data-filename="layout" data-linenumber="175" data-visual-selector-id="layout175" data-source-location="layout:175:14" data-dynamic-content="false"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+        </div>
+        <div class="mt-6 md:mt-8 px-2">
+          <nav class="space-y-1.5">
+            <a class="cor-b1 flex items-center rounded-lg px-3 py-2 transition-colors hover:bg-gray-100 hover:text-gray-900 bg-blue-50 font-medium text-primary" href="/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Início</a>
+            <a class="flex items-center rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900" href="/NovaSolicitacao.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span>Nova Solicitação</span></a>
+            <a class="flex items-center rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900" href="/MinhasSolicitacoes.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-check-big mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5"></path><path d="m9 11 3 3L22 4"></path></svg><span data-filename="layout" data-linenumber="193" data-visual-selector-id="layout193" data-source-location="layout:193:18" data-dynamic-content="true">Minhas Solicitações</span></a>
+            <a class="flex items-center rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900" href="/Transparencia.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-column mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg><span data-filename="layout" data-linenumber="193" data-visual-selector-id="layout193" data-source-location="layout:193:18" data-dynamic-content="true">Transparência</span></a>
+          </nav>
+        </div>
+      </aside>
+      <main class="flex-1 overflow-auto px-4 py-6 md:px-6 md:py-8">
+        <div class="container max-w-6xl mx-auto space-y-8">
+          <section class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 p-6 md:p-10 text-white">
+              <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524055988636-436cfa46e59e?q=80&amp;w=1080')] bg-cover bg-center opacity-10">
+              </div>
+              <div class="relative z-10 max-w-4xl">
+                <h1 class="mb-4 text-3xl font-bold md:text-4xl">Bem-vindo ao Conecta Cidadão</h1>
+                <p class="mb-8 py-4 text-sm md:text-base opacity-90">Um canal direto entre você e a administração municipal para solicitações de serviços, denúncias e acompanhamento em tempo real.</p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                  <a class="inline-flex items-center justify-center gap-2  text-sm font-semibold line-none whitespace-nowrap  disabled:pointer-events-none h-11 rounded-md px-8  bg-white text-blue-600 hover:bg-gray-100" href="/NovaSolicitacao.html"><i class="fa-solid fa-plus"></i>Nova Solicitação</a>
+                  <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-background hover:text-accent-foreground h-11 rounded-md px-8 border-white text-white hover:bg-white/20" href="/MinhasSolicitacoes.html">Acompanhar Solicitações</a>
+                </div>
+              </div>
+            </section>
+              <section class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div class="rounded-lg border bg-card text-card-foreground overflow-hidden border-none shadow-md transition-all hover:shadow-lg">
+                  <div class="h-2 bg-blue-500"></div>
+                  
+                  <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-5 w-5 text-blue-500" ><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>Solicitações de Serviços
+                    </h3>
+                    <p class="text-sm cor-7 pt-2">Registre pedidos para serviços públicos com facilidade</p>
+                  </div>
+                  <div class="p-6 pt-0">
+                    <p class="text-sm cor-8">Solicite limpeza urbana, poda de árvores, reparos em vias públicas e muito mais. Anexe fotos para melhor identificação do problema.</p>
+                  </div>
+                  <div class="flex items-center p-6 pt-0">
+                    <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold ring-offset-background transition-colors text-blue-600 outline-1 outline-offset-1 outline-blue-400 hover:bg-blue-50 h-10 px-4 py-2 w-full btn2" href="/NovaSolicitacao.html">
+                      <span>Solicitar Serviço</span><i class="seta pl-2 fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground overflow-hidden border-none shadow-md transition-all hover:shadow-lg">
+                  <div class="h-2 bg-amber-500"></div>
+                  <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check h-5 w-5 text-amber-500"  >
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                      <path d="m9 15 2 2 4-4"></path>
+                    </svg>Denúncias e Reclamações</h3>
+                    <p class="text-sm cor-7 pt-2">Canal direto para reportar problemas</p>
+                  </div>
+                  <div class="p-6 pt-0">
+                    <p class="text-sm cor-8 pt-5">Registre denúncias, reclamações ou sugestões com total sigilo e acompanhe o status em tempo real com protocolo de acesso.</p>
+                  </div>
+                  <div class="flex items-center p-6 pt-0">
+                    <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold ring-offset-background text-amber-600 transition-colors outline-1 outline-offset-1 outline-amber-300 hover:bg-amber-50 h-10 px-4 py-2 w-full btn2" href="/NovaSolicitacao?tipo=Denúncia">
+                      <span>Fazer Denúncia</span><i class="seta pl-2 fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground overflow-hidden border-none shadow-md transition-all hover:shadow-lg">
+                  <div class="h-2 bg-green-500"></div>
+                  <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-check-big h-5 w-5 text-green-500" data-filename="pages/Home" data-linenumber="94" data-visual-selector-id="pages/Home94" data-source-location="pages/Home:94:14" data-dynamic-content="false"><path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5"></path><path d="m9 11 3 3L22 4"></path>
+                      </svg>Acompanhamento</h3>
+                      <p class="text-sm cor-7 pt-2">Monitore suas solicitações em tempo real</p>
+                    </div>
+                    <div class="p-6 pt-0"><p class="text-sm cor-8 pt-4">Acompanhe o status de todas as suas solicitações, receba atualizações e avalie os serviços prestados após a conclusão.</p>
+                    </div>
+                    <div class="flex items-center p-6 pt-1">
+                      <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold ring-offset-background text-green-600 transition-colors outline-1 outline-offset-1 outline-green-300 hover:bg-green-50 h-10 px-4 py-2 w-full btn2" href="/MinhasSolicitacoes.html"><span>Minhas Solicitações</span><i class="seta pl-2 fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </section>
+              <section class="grid gap-6 md:grid-cols-2">
+                <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md">
+                  <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-column h-5 w-5 text-blue-500" data-source-location="pages/Home:122:14" data-dynamic-content="false"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line>
+                      </svg>Transparência
+                    </h3>
+                  </div>
+                  <div class="p-6 pt-0">
+                    <div class="grid grid-cols-2 gap-4">
+                      <div class="rounded-lg bg-purple-100 p-4 text-center">
+                        <p class="text-3xl font-bold text-blue-700">85%</p><p class="text-sm text-gray-600">Taxa de Resolução</p>
+                      </div>
+                      <div class="rounded-lg bg-green-50 p-4 text-center">
+                        <p class="text-3xl font-bold text-green-700">2.380
+                        </p>
+                        <p class="text-sm text-gray-600">Solicitações Atendidas
+                        </p>
+                      </div>
+                      <div class="rounded-lg bg-amber-50 p-4 text-center">
+                        <p class="text-3xl font-bold text-amber-700">3 dias
+                        </p>
+                        <p class="text-sm text-gray-600">Tempo Médio</p>
+                      </div>
+                      <div class="rounded-lg bg-purple-100 p-4 text-center">
+                        <p class="text-3xl font-bold text-purple-700">4.2</p>
+                        <p class="text-sm text-gray-600">Avaliação Média</p>
+                      </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                      <a class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-semibold ring-offset-background transition-colors h-9 rounded-md px-3 text-blue-600 btn2" href="/Transparencia.html"><span>Ver relatório completo</span><i class="seta pl-2 fa-solid fa-arrow-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md">
+                  <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-5 w-5 text-blue-500" ><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Solicitações Recentes
+                    </h3>
+                  </div>
+                  <div class="p-6 pt-0">
+                    <div class="space-y-4">
+                      <div class="flex items-center gap-3 rounded-lg border border-gray-300 p-3">
+                        <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-5 w-5 text-blue-500" ><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <p class="truncate font-medium">Poda de Árvore</p>
+                        <p class="text-sm text-gray-500 truncate">Rua das Flores, 123</p>
+                      </div>
+                      <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-green-100 text-green-800 hover:bg-green-100" >Concluído
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-3 rounded-lg border border-gray-300 p-3">
+                      <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-5 w-5 text-blue-500" ><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <p class="truncate font-medium">Limpeza de Praça</p>
+                        <p class="text-sm text-gray-500 truncate">Praça Central</p>
+                      </div>
+                      <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-amber-100 text-amber-800 hover:bg-amber-100">Em Andamento
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-3 rounded-lg border border-gray-300 p-3">
+                      <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-5 w-5 text-blue-500" ><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <p class="truncate font-medium">Iluminação Pública</p>
+                        <p class="text-sm text-gray-500 truncate">Avenida Principal, 500</p>
+                      </div>
+                      <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-blue-100 text-blue-800 hover:bg-blue-100" >Recebido
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="rounded-xl bg-gray-50 p-6 questions">
+              <div class="flex py-4">
+              <h2 class="mb-4 pb-4 text-xl font-bold flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#2b7fff" d="M528 320C528 205.1 434.9 112 320 112C205.1 112 112 205.1 112 320C112 434.9 205.1 528 320 528C434.9 528 528 434.9 528 320zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320zM320 240C302.3 240 288 254.3 288 272C288 285.3 277.3 296 264 296C250.7 296 240 285.3 240 272C240 227.8 275.8 192 320 192C364.2 192 400 227.8 400 272C400 319.2 364 339.2 344 346.5L344 350.3C344 363.6 333.3 374.3 320 374.3C306.7 374.3 296 363.6 296 350.3L296 342.2C296 321.7 310.8 307 326.1 302C332.5 299.9 339.3 296.5 344.3 291.7C348.6 287.5 352 281.7 352 272.1C352 254.4 337.7 240.1 320 240.1zM288 432C288 414.3 302.3 400 320 400C337.7 400 352 414.3 352 432C352 449.7 337.7 464 320 464C302.3 464 288 449.7 288 432z"/></svg>
+               Perguntas Frequentes
+              </h2>
+              </div>
+              <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div class="rounded-lg bg-white p-4 shadow-sm ht pergunta" onclick="toggleResposta(0)">
+                  <div class="flex gap-4 items-center">
+                  <h3 class="font-semibold pb-2">Como acompanho minha solicitação?</h3><i class="ico ml-2 fa-solid fa-chevron-down"></i>
+                  </div>
+                  <p class="pt-2 text-sm text-gray-600 resposta">Acesse 'Minhas Solicitações' para ver o status em tempo real e receber atualizações.</p>
+                </div>
+                <div class="rounded-lg bg-white p-4 shadow-sm ht pergunta" onclick="toggleResposta(1)">
+                  <div class="flex gap-4 items-center">
+                    <h3 class="font-semibold">Quanto tempo leva para resolver meu pedido?</h3><i class="ico fa-solid fa-chevron-down"></i>
+                  </div>
+                  <p class="pt-4 text-sm text-gray-600 resposta">O tempo varia conforme o tipo de solicitação, mas o tempo médio atual é de 3 dias.</p>
+                </div>
+                <div class="rounded-lg bg-white p-4 shadow-sm ht pergunta"  onclick="toggleResposta(2)">
+                  <div class="flex gap-4 items-center">
+                  <h3 class="font-semibold">Posso fazer uma denúncia anônima?</h3><i class="ico ml-1 fa-solid fa-chevron-down"></i>
+                  </div>
+                  <p class="pt-4 text-sm text-gray-600 resposta">Sim, ao criar uma denúncia você pode optar pelo anonimato.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+      </main>
+    </div>
+    
+    <script src="./js/script.js"></script>
+  </body>
+</html>

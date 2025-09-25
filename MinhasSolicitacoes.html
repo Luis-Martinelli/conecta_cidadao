@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preload" href="./css/style.css" as="style">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/0bb2a92b24.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="../img/site.webmanifest">
+    <link rel="mask-icon" href="../img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <script>
+      function decodeJWT(token) {
+
+        let base64Url = token.split(".")[1];
+        let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        let jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        );
+        return JSON.parse(jsonPayload);
+      }
+
+      function handleCredentialResponse(response) {
+
+        console.log("Encoded JWT ID token: " + response.credential);
+
+        const responsePayload = decodeJWT(response.credential);
+
+        console.log("Decoded JWT ID token fields:");
+        console.log("  Full Name: " + responsePayload.name);
+        console.log("  Given Name: " + responsePayload.given_name);
+        console.log("  Family Name: " + responsePayload.family_name);
+        console.log("  Unique ID: " + responsePayload.sub);
+        console.log("  Profile image URL: " + responsePayload.picture);
+        console.log("  Email: " + responsePayload.email);
+      }
+    </script>
+    <title>Conecta Cidadão</title>
+  </head>
+  <body>
+    <header class="header">
+      
+        <div class="flex items-center gap-2">
+          <button class="burger inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 mr-2 md:hidden" data-filename="layout" data-linenumber="98" data-visual-selector-id="layout98" data-source-location="layout:98:10" data-dynamic-content="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6" data-filename="layout" data-linenumber="104" data-visual-selector-id="layout104" data-source-location="layout:104:12" data-dynamic-content="false"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button>
+          <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?q=80&w=100" alt="Logo">
+          <h1 class="text-lg font-bold">Conecta Cidadão</h1>
+        </div>
+
+        <div class="buttons">
+          <button class="notifications"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-5 w-5" data-filename="layout" data-linenumber="122" data-visual-selector-id="layout122" data-source-location="layout:122:16" data-dynamic-content="false"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></button>
+          <div class="body-notifications">
+            <div class="header-notifications">Notificações
+            </div>
+            <div class="content-notifications p-4">Não há notificações novas.
+            </div>
+          </div>
+          <button class="profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-5 w-5" data-filename="layout" data-linenumber="137" data-visual-selector-id="layout137" data-source-location="layout:137:16" data-dynamic-content="false"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></button>
+          <div class="flex flex-nowrap body-profile p-2 gap-12">
+            <ul>
+              <p class="font-semibold">Minha Conta</p>
+              <li>Perfil</li>
+              <li class="exit">Sair<i class="fa-solid fa-right-from-bracket"></i></li>
+            </ul>
+          </div>
+        </div>
+    </header>
+    <div class="bg fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"></div>
+    <div class="body">
+      <aside class="fixed inset-y-0 left-0 z-50 w-64 transform overflow-y-auto bg-white px-2 pb-10 pt-16 transition duration-200 md:relative md:inset-y-0 md:translate-x-0 md:pb-0 md:pt-0 -translate-x-full" id="aside">
+        <div class="absolute right-2 top-4 md:hidden">
+          <button id="close" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10" data-filename="layout" data-linenumber="174" data-visual-selector-id="layout174" data-source-location="layout:174:12" data-dynamic-content="false"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6" data-filename="layout" data-linenumber="175" data-visual-selector-id="layout175" data-source-location="layout:175:14" data-dynamic-content="false"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+        </div>
+        <div class="mt-6 md:mt-8 px-2">
+          <nav class="space-y-1.5">
+            <a class="flex items-center rounded-lg px-3 py-2 transition-colors hover:bg-gray-100 hover:text-gray-900  font-medium text-primary" href="/home.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Início</a>
+            <a class="flex items-center rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900" href="/NovaSolicitacao.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span>Nova Solicitação</span></a>
+            <a class=" cor-b1 flex items-center rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 bg-blue-50 hover:text-gray-900" href="/MinhasSolicitacoes.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-check-big mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.5"></path><path d="m9 11 3 3L22 4"></path></svg><span data-filename="layout" data-linenumber="193" data-visual-selector-id="layout193" data-source-location="layout:193:18" data-dynamic-content="true">Minhas Solicitações</span></a>
+            <a class="flex items-center rounded-lg px-3 py-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900" href="/Transparencia.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-no-axes-column mr-3 h-5 w-5" data-source-location="layout:192:18" data-dynamic-content="false"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg><span data-filename="layout" data-linenumber="193" data-visual-selector-id="layout193" data-source-location="layout:193:18" data-dynamic-content="true">Transparência</span></a>
+
+          </nav>
+        </div>
+
+      </aside>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

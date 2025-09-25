@@ -1,0 +1,20 @@
+.pergunta {
+  cursor: pointer;
+}
+.resposta {
+  overflow: hidden;
+  opacity: 0;
+}
+.pergunta.ativa .resposta {
+  height: 100px;
+  opacity: 1;
+  overflow: visible;
+  transition: 0.5s;
+}
+.ht{
+  max-height: 80px;
+  transition: height 0.5s ease;
+}
+.ico {
+  transition: 0.5s;
+}
