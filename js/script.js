@@ -52,3 +52,23 @@ function toggleResposta(index) {
     }
   });
 };
+
+//Nova Solicitação
+
+function select(option) {
+  const btnServico = document.getElementById('btn-servico');
+  const btnDenuncia = document.getElementById('btn-denuncia');
+
+   if(option === 'servico'){
+    document.getElementById("service-page").style.display = 'block';
+    document.getElementById("report-page").style.display = 'none';
+    btnDenuncia.setAttribute("data-state", "inactive");
+    btnServico.setAttribute("data-state", "active");
+  } else if(option === 'denuncia') {
+    document.getElementById("report-page").style.display = 'block';
+    document.getElementById("service-page").style.display = 'none';
+    btnServico.setAttribute("data-state", "inactive");
+    btnDenuncia.setAttribute("data-state", "active");
+  }
+};
+// select('content-servico');

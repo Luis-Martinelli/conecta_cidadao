@@ -104,11 +104,34 @@
           </div>
           <form>
             <div class="mb-6">
-              <div class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid grid-cols-2 w-full">
-                <button type="button" role="tab" aria-selected="true" aria-controls="radix-:r8:-content-servico" data-state="active" id="radix-:r8:-trigger-servico" class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm">Serviço</button>
-                <button type="button" role="tab" aria-selected="false" aria-controls="radix-:r8:-content-denuncia" data-state="inactive" id="radix-:r8:-trigger-denuncia" class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm">Denúncia/Reclamação</button>
+              <div class="h-10 items-center justify-center rounded-md bg-gray-200 p-1 text-muted-foreground grid grid-cols-2 w-full">
+                <button type="button" role="tab" aria-selected="true" aria-controls="content-servico" data-state="active" id="btn-servico" class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-semibold  disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-gray-50 data-[state=active]:text-foreground data-[state=active]:shadow-sm" onclick="select('servico')">Serviço</button>
+                <button type="button" role="tab" aria-selected="false" aria-controls="content-denuncia" data-state="inactive" id="btn-denuncia" class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-semibold  disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-gray-50 data-[state=active]:text-foreground data-[state=active]:shadow-sm" onclick="select('denuncia')">Denúncia/Reclamação</button>
               </div>
-              <div class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-4">
+              <div class="mt-4" id="report-page">
+                <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md bg-gray-50">
+                  <div class="flex flex-col space-y-1.5 p-6">
+                    <h3 class="text-2xl font-semibold leading-none tracking-tight">Registrar Denúncia/Reclamação</h3>
+                  </div>
+                  <div class="p-6 pt-0 space-y-4">
+                    <div class="space-y-2">
+                      <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" >Tipo</label>
+                      <div role="radiogroup" aria-required="false" dir="ltr" class="mt-2 flex gap-4">
+                        <div class="flex items-center">
+                          <input type="radio" aria-hidden="true" value="Denuncia" checked="true" name="tipo_denuncia"><label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2" for="denuncia">Denúncia</label>
+                        </div>
+                        <div class="flex items-center">
+                          <input type="radio" aria-hidden="true" value="reclamacao" name="tipo_denuncia"><label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2" for="reclamacao">Reclamação</label>
+                        </div>
+                        <div class="flex items-center">
+                          <input type="radio" aria-hidden="true" value="sugestao" name="tipo_denuncia"><label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2" for="sugestao">Sugestão</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ring-offset-background mt-4 bg-gray-50" id="service-page">
                 <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md">
                   <div class="flex flex-col space-y-1.5 p-6">
                     <h3 class="text-2xl font-semibold leading-none tracking-tight">Solicitar Serviço</h3>
@@ -128,47 +151,48 @@
                   </div>
                 </div>
               </div>
-              <div class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 mt-4" data-filename="pages/NovaSolicitacao">
-              </div>
             </div>
-            <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md mb-6">
+            <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md mb-6 bg-gray-50">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold leading-none tracking-tight">Detalhes da Solicitação</h3>
               </div>
               <div class="p-6 pt-0 space-y-4">
-                <div class="space-y-2"><label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="categoria">Categoria</label><button type="button" role="combobox" aria-controls="radix-:rd:" aria-expanded="false" aria-autocomplete="none" dir="ltr" data-state="closed" data-placeholder="" class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&amp;&gt;span]:line-clamp-1"><span d style="pointer-events: none;">Selecione a categoria</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 opacity-50" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
-                  <select aria-hidden="true" tabindex="-1" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; overflow-wrap: normal;">
-                    <option value="Outros">Outros</option>
+                <div class="space-y-2">
+                  
+                  <label class="text-sm font-medium flex items-center gap-1" for="categoria"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 text-gray-500"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>Categoria</label>
+                    <select class="border-gray-300 opacity-70 flex h-10 w-full items-center justify-between rounded-md border mt-1 px-3 py-2 text-sm ring-offset-background focus:outline-1 focus:outline-blue-500 focus:invalid:outline-red-900 focus:invalid:border-red-900 name="categoria" id="" required="required">
+                    <option value="">Selecione a categoria</option>
                     <option value="Poda de Árvore">Poda de Árvore</option>
                     <option value="Limpeza de Praça">Limpeza de Praça</option>
                     <option value="Iluminação Pública">Iluminação Pública</option>
                     <option value="Buracos em Via">Buracos em Via</option>
+                    <option value="Outros">Outros</option>
                   </select>
                 </div>
                 <div class="space-y-2">
-                  <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="descricao">Descrição</label>
-                  <textarea class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="descricao" placeholder="Descreva o problema ou sua solicitação em detalhes" rows="4"></textarea>
+                  <label class="text-sm font-medium flex items-center gap-1" for="descricao"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 text-gray-500"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>Descrição</label>
+                  <textarea class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 mt-1 text-sm ring-offset-background focus:outline-1 focus:outline-blue-500 focus:invalid:outline-red-900 focus:invalid:border-red-900 border-gray-300" id="descricao" placeholder="Descreva o problema ou sua solicitação em detalhes" rows="4"></textarea>
                 </div>
                 <div class="space-y-2">
-                  <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-1" for="endereco"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 text-gray-500"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Endereço</label>
-                  <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" id="endereco" placeholder="Informe o endereço ou localização" value="">
+                  <label class="text-sm font-medium flex items-center gap-1" for="endereco"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 text-gray-500"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Endereço</label>
+                  <input class="flex h-10 w-full rounded-md border focus:outline-1 focus:outline-blue-500 focus:invalid:outline-red-900 focus:invalid:border-red-900 border-gray-300 px-3 py-2 text-base file:text-sm file:font-medium file:text-foreground disabled:opacity-50 md:text-sm" id="endereco" placeholder="Informe o endereço ou localização" value="">
                 </div>
               </div>
             </div>
-            <div class="rounded-lg border bg-card text-card-foreground border-none shadow-md mb-6">
+            <div class="rounded-lg border bg-card border-none shadow-md mb-6 bg-gray-50">
               <div class="flex flex-col space-y-1.5 p-6">
                 <h3 class="text-2xl font-semibold leading-none tracking-tight">Anexar Fotos</h3>
               </div>
               <div class="p-6 pt-0">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"></div>
                 <div class="flex gap-4">
-                  <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 flex items-center gap-2" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up h-4 w-4">
+                  <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium hover:bg-gray-200 border border-blue-500 h-10 px-4 py-2 flex items-center gap-2" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up h-4 w-4">
                     <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
                     <path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M12 12v6"></path>
                     <path d="m15 15-3-3-3 3"></path>
                   </svg><span>Escolher Arquivos</span>
                 </button>
-                <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 flex items-center gap-2" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera h-4 w-4">
+                <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium hover:bg-gray-200 border border-blue-500 h-10 px-4 py-2 flex items-center gap-2" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera h-4 w-4">
                   <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
                   <circle cx="12" cy="13" r="3"></circle>
                 </svg>
@@ -177,11 +201,11 @@
             </div>
             <input id="foto-upload" type="file" accept="image/*" multiple="" class="hidden">
             <input id="camera-upload" type="file" accept="image/*" capture="environment" class="hidden">
-            <p class="text-xs text-gray-500 mt-2">Anexe fotos para ajudar na identificação do problema.</p>
+            <p class="text-xs text-gray-500 pt-2 pl-1">Anexe fotos para ajudar na identificação do problema.</p>
           </div>
         </div>
-        <div class="flex justify-end mt-8">
-          <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground h-10 px-4 py-2 bg-blue-600 hover:bg-blue-700 flex items-center gap-2" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send h-4 w-4" data-filename="pages/NovaSolicitacao" data-linenumber="506" data-visual-selector-id="pages/NovaSolicitacao506" data-source-location="pages/NovaSolicitacao:506:14" data-dynamic-content="false">
+        <div class="flex justify-center md:justify-end mt-4">
+          <button class="justify-center whitespace-nowrap rounded-md text-sm font-semibold h-10 px-4 py-2 bg-blue-600 hover:bg-blue-700 flex items-center gap-2 text-white" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send h-4 w-4" data-filename="pages/NovaSolicitacao" data-linenumber="506" data-visual-selector-id="pages/NovaSolicitacao506" data-source-location="pages/NovaSolicitacao:506:14" data-dynamic-content="false">
             <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
             <path d="m21.854 2.147-10.94 10.939"></path>
           </svg>
